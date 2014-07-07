@@ -1,0 +1,14 @@
+<h3> Clientes </h3>
+
+<%= link_to "Novo PF", :action => "add" , :tp_cliente => "pf" %>
+<%= link_to "Novo PJ", :action => "add" , :tp_cliente => "pj" %>
+
+<br>
+
+<table>
+	<tr>
+		<th> Nome/Razão social </th>
+		<th>  </th>
+<% @cliente.each do |c| %>
+	<%= c.nome %> <%= c.rz_social %>
+<% end %>

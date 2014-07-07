@@ -1,0 +1,24 @@
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: osmanagerdb
+  pool: 5
+  username: jefferson
+  password: je@14051994
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: osmanagerdb
+  pool: 5
+  username: jefferson
+  password: je@14051994
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: osmanagerdb
+  pool: 5
+  username: jefferson
+  password: je@14051994
