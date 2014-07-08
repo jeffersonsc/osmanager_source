@@ -8,7 +8,18 @@
 <table>
 	<tr>
 		<th> Nome/Razão social </th>
-		<th>  </th>
-<% @cliente.each do |c| %>
-	<%= c.nome %> <%= c.rz_social %>
-<% end %>
+		<th> Tipo cliente </th>
+		<th> Situaçao </th>
+		<th> Criado em </th>
+		<th></th>
+	</tr>
+	<% @cliente.each do |c| %>
+		<tr>
+			<td> <%= c.nome %> <%= c.rz_social %> </td>
+			<td> <%= cliente(c.tp_cliente) %> </td>
+			<td> <%= situacao(c.status) %> </td>
+			<td> <%= datetime(c.created_at) %> </td>
+			<td> <%= link_to "Detalhes" , "#" %> <%= link_to "Editar" , :action => "editar", :tp_cliente => if c.tp_cliente == true then "pf" else "pj" end , :cliente_id => c.id %> <%= link_to "Bloquear" , "#" %> </td>
+		</tr>
+	<% end %>
+</table>

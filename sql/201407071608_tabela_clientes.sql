@@ -33,7 +33,7 @@ celular VARCHAR(15),
 email VARCHAR(80),
 
 tp_cliente BOOLEAN,
-status BOOLEAN DEFAULT false,
+status BOOLEAN DEFAULT true,
 created_at TIMESTAMP DEFAULT now(),
 updated_at TIMESTAMP
 );

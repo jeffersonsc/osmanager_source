@@ -1,0 +1,19 @@
+<h3> Editar </h3>
+<% if params[:tp_cliente] != "" %>
+	<% if @cliente.errors.any? %>
+		<h2><%= pluralize(@cliente.errors.count, "Erro") %> foram encontrado:</h2>
+		<ul>
+			<% @cliente.errors.full_messages.each do |msg| %>
+				<li> <%= msg %> </li>
+			<% end %>
+	<% end %>
+
+	<%= form_for(@cliente , :url => {:controller => "cliente" , :action => "update" , :tp_cliente => params[:tp_cliente], :clitente_id => @cliente_id }, :method => :post) do |f| %>
+		<%= render(:partial => "form" , :locals => {:f => f})%>
+		<%= f.submit "Enviar" %>
+	<% end %>
+<% end %>
+
+<p>
+	<%= link_to "Voltar", :action => "index" %>
+</p>
