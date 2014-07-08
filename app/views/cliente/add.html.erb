@@ -10,7 +10,7 @@
 
 	<%= form_for(@cliente , :url => {:controller => "cliente" , :action => "add_cliente" , :tp_cliente => params[:tp_cliente]}) do |f| %>
 		<%= render(:partial => "form" , :locals => {:f => f})%>
-		<%= f.submit "Enviar" %>
+		<%= f.submit "Salvar" %>
 	<% end %>
 <% end %>
 

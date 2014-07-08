@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.5'
 
+#para páginação
+#gem "will_paginate", :git => "git://github.com/mislav/will_paginate.git"
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 

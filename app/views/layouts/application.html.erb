@@ -10,7 +10,8 @@
 	<nav>
 		<ul>
 			<li> <%= link_to "Menu" , "#" %> </li>
-			<li> <%= link_to "Clientes" , "#" %> </li>
+			<li> <%= link_to "Clientes" , {:controller => "cliente", :action => "index"} %> </li>
+			<li> <%= link_to "Contratos" , "#" %> </li>
 			<li> <%= link_to "Chamados" , "#" %> </li>
 			<li> <%= link_to "Produtos" , "#" %> </li>
 		</ul>

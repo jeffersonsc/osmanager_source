@@ -8,7 +8,15 @@ module ApplicationHelper
 	end
 
 	def situacao(value)
-		if value == true
+		if value == false
+			"Ativo"
+		else
+			"Inativado"
+		end
+	end
+
+	def status(value)
+		if value == false
 			"Ativo"
 		else
 			"Bloqueado"
