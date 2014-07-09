@@ -6,6 +6,7 @@
 			<% @cliente.errors.full_messages.each do |msg| %>
 				<li> <%= msg %> </li>
 			<% end %>
+		</ul>
 	<% end %>
 
 	<%= form_for(@cliente , :url => {:controller => "cliente" , :action => "add_cliente" , :tp_cliente => params[:tp_cliente]}) do |f| %>

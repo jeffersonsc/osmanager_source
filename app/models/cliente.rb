@@ -4,7 +4,10 @@ class Cliente < ActiveRecord::Base
 
 	def self.buscar(value)
 		if value
-			where("nome ILIKE ? OR rz_social ILIKE ? OR nome_responsavel ILIKE ?", "%#{value}%", "%#{value}%", "%#{value}%")
+			where(" nome ILIKE ? 
+							OR rz_social ILIKE ?
+							OR nome_responsavel ILIKE ?
+							OR cep ILIKE ?", "%#{value}%", "%#{value}%", "%#{value}%", "%#{value}%" )
 		else
 			all
 		end

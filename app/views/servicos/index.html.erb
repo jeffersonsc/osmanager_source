@@ -1,0 +1,25 @@
+<h4> Serviços </h4>
+
+<table>
+	<tr>
+		<th> Código </th>
+		<th> Nome </th>
+		<th> Preço </th>
+		<th></th>
+	</tr>
+	<% @servico.each do |s| %>
+		<tr>
+			<td> <%= s.id %> </td>
+			<td> <%= s.nome %> </td>
+			<td> <%= s.preco %> </td>
+			<td> 
+				<%= link_to("Editar", {:action => "editar", :servico_id => s.id }) %>
+				<% if s.status == false %>
+					<%= link_to("Inativar", {:action => "status", :servico_id => s.id , :acao => "ina" }) %>
+				<% else %>
+					<%= link_to("Ativar", {:action => "status", :servico_id => s.id , :acao => "atv" }) %>
+				<% end %>
+			</td>
+		</tr>
+	<% end %>
+</table>

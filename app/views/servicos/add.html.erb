@@ -1,0 +1,14 @@
+<h4> Serviços </h4>
+
+<% if @servico.errors.any? %>
+	<h3><%= pluralize(@servico.errors.count, "erro") %> foram encontrado:</h3>
+	<ul>
+		<% @servico.errors.full_messages.each do |msg| %>
+			<li> <%= msg %> </li>
+		<% end %>
+	</ul>
+<% end %>
+
+<%= form_for(@servico , :url => {:controller => "servicos" , :action => "add_servico"}, :method => :post) do |f| %>
+	<%= render(:partial => "form", :locals => { :f => f }) %>
+<% end %>

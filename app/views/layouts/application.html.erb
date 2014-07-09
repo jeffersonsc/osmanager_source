@@ -7,11 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<header>
+		<% flash.each do |key , msg| %>
+			<div class="flash <%= key %>" id="flash">
+				<%= msg %>
+			</div>
+		<% end %>
+	</header>
 	<nav>
 		<ul>
 			<li> <%= link_to "Menu" , "#" %> </li>
 			<li> <%= link_to "Clientes" , {:controller => "cliente", :action => "index"} %> </li>
 			<li> <%= link_to "Contratos" , "#" %> </li>
+			<li> <%= link_to "Serviços" , {:controller => "servicos", :action => "index"} %> </li>
 			<li> <%= link_to "Chamados" , "#" %> </li>
 			<li> <%= link_to "Produtos" , "#" %> </li>
 		</ul>

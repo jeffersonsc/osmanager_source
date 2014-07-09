@@ -1,0 +1,19 @@
+<h4> Editar </h4>
+
+<% if @servico.errors.any? %>
+	<h3><%= pluralize(@servico.errors.count, "erro") %> foram encontrado:</h3>
+	<ul>
+		<% @servico.errors.full_messages.each do |msg| %>
+			<li> <%= msg %> </li>
+		<% end %>
+	</ul>
+<% end %>
+
+<%= form_for(@servico , :url => {:controller => "servicos" , :action => "update" , :servico_id => params[:servico_id]}, :method => :post) do |f| %>
+	<%= f.hidden_field :id %>
+	<%= render(:partial => "form", :locals => { :f => f }) %>
+<% end %>
+
+<p>
+	<%= link_to("Voltar" , :action => "index")%>
+</p>

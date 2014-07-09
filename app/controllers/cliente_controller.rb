@@ -1,9 +1,8 @@
 class ClienteController < ApplicationController
 
 	def index
-		@cliente = Cliente.buscar(params[:busca])
+		@cliente = Cliente.buscar(params[:busca]).paginate(:page => params[:page] , :per_page => 20)
 	end
-
 	def add
 		@cliente = Cliente.new
 		@ssp = ["AC","AL", "AP", "AM", "BA", "CE", "DF" , "ES" , "GO" ,
@@ -80,7 +79,7 @@ class ClienteController < ApplicationController
 			msg = "Cliente bloquear com sucesso!"
 		elsif params[:acao] == "desbloquear"
 			sql = false
-			msg = "Cliente desbloquear com sucesso!"
+			msg = "Cliente desbloqueado com sucesso!"
 		end
 			cliente = Cliente.where("id = ?", params[:cliente_id])[0]
 			cliente.update_attributes(:status => sql)
@@ -94,7 +93,7 @@ class ClienteController < ApplicationController
 			msg = "Cliente inativado com sucesso!"
 		elsif params[:acao] == "ativar"
 			sql = false
-			msg = "Cliente inativado com sucesso!"
+			msg = "Cliente ativado com sucesso!"
 		end
 			cliente = Cliente.where("id = ?", params[:cliente_id])[0]
 			cliente.update_attributes(:inativo => sql)

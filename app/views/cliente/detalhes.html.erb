@@ -46,7 +46,10 @@
 		Telefone: <%= c.telefone3 %> <br />
 		Celular: <%= c.celular %> <br />
 	</p>
-
+	<p>
+		Criado em: <%= datetime(c.created_at) %> <br />
+		Última alteração: <%= datetime(c.updated_at) %>
+	</p>
 <% end %>
 
 <p>
