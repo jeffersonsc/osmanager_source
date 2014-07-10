@@ -6,3 +6,27 @@
 		<li> <%= link_to "Tipos Contrato" , {:controller => "tipos_contratos", :action => "index"} %> </li>
 	</ul>
 </nav>
+
+<table>
+	<tr>
+		<th> Cliente </th>
+		<th> Tipo de contrato </th>
+		<th> Valido até </th>
+		<th> Situação </th>
+		<th> Status </th>
+		<th></th>
+	</tr>
+	<% @contratos.each do |c| %>
+		<tr>
+			<td> <%= c.cliente_nome %> </td>
+			<td> <%= c.tp_contrato_nome %> </td>
+			<td> <%= date(c.validade) %> </td>
+			<td> <%= c.situacao %> </td>
+			<td> <%= status(c.status) %> </td>
+			<td>
+				<%= link_to("Editar" , :action => "editar" , :contrato_id => c.id ) %>
+				<%= link_to ""%>
+			</td>
+		</tr>
+	<% end %>
+</table>

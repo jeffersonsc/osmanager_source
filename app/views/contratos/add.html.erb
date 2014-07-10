@@ -9,8 +9,11 @@
 	</ul>
 <% end %>
 
-<%= form_for(@contrato , :url => {:controller => "contratos" , :action => "add_contrato"}, :method => :post) do |f| %>
+<%= form_for(@contrato , :url => {:controller => "contratos" , :action => "add_contrato"}, :multpart => true ,:method => :post) do |f| %>
 	<%= render(:partial => "form", :locals => { :f => f }) %>
+	<p>
+		<%= f.submit "Salvar" %>
+	</p>
 <% end %>
 
 <p>

@@ -35,6 +35,12 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+#Passenger
+gem 'passenger'
+
+# idioma
+gem 'i18n', :git => 'https://github.com/svenfuchs/i18n.git'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -13,7 +13,6 @@ rg VARCHAR(15),
 ssp CHAR(2),
 naturalidade VARCHAR,
 
-rz_social VARCHAR(100),
 nome_responsavel VARCHAR(100),
 cnpj VARCHAR,
 ie VARCHAR(9),
