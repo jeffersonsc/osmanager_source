@@ -1,0 +1,31 @@
+<h4> Tipos de contrato </h4>
+
+<nav>
+	<ul>
+		<li> <%= link_to "Novo tipo de contrato" , {:controller => "tipos_contratos", :action => "add"} %> </li>
+	</ul>
+</nav>
+
+<table>
+	<tr>
+		<th> Nome </th>
+		<th> Status </th>
+		<th> Descrição </th>
+		<th></th>
+	</tr>
+	<% @tp_contrato.each do |tp| %>
+		<tr>
+			<td> <%= tp.nome %> </td>
+			<td> <%= status(tp.status) %> </td>
+			<td> <%= tp.descricao %> </td>
+			<td>
+				<%= link_to "Editar" , {:action => "editar" , :tp_contrato_id => tp.id } %> 
+				<% if tp.status == false %>
+					<%= link_to "Bloquear" , {:action => "status" , :acao => true , :tp_contrato_id => tp.id} %>
+				<% else %>
+					<%= link_to "Desbloquear" , {:action => "status" , :acao => false , :tp_contrato_id => tp.id } %>
+				<% end %>
+			</td>
+		</tr>
+	<% end %>
+</table>

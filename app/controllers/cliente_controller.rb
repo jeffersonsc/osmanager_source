@@ -105,7 +105,7 @@ class ClienteController < ApplicationController
 		def cliente_params
 			params.require(:cliente).permit(:nome , :tp_cliente , :sexo , :dt_nascimento , :rg ,
 																			:ssp , :cpf , :naturalidade , :nome_mae , :nome_pai ,
-																			:rz_social , :ie , :cnpj , :nome_responsavel , :cep ,
+																			:ie , :cnpj , :nome_responsavel , :cep ,
 																			:endereco , :numero , :complemento , :bairro , :cidade ,
 																			:estado , :email , :telefone1 , :telefone2 , :telefone3 , :celular)
 		end

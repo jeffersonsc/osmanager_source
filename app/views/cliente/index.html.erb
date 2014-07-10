@@ -29,7 +29,7 @@
 	</tr>
 	<% @cliente.each do |c| %>
 		<tr>
-			<td> <%= c.nome %> <%= c.rz_social %> </td>
+			<td> <%= c.nome %> </td>
 			<td> <%= c.nome_responsavel %></td>
 			<td> <%= cliente(c.tp_cliente) %> </td>
 			<td> <%= status(c.status) %> </td>

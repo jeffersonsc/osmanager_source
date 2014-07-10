@@ -1,0 +1,18 @@
+<h4> Novo Contrato </h4>
+
+<% if @contrato.errors.any? %>
+	<h3><%= pluralize(@contrato.errors.count, "erro") %> foram encontrado:</h3>
+	<ul>
+		<% @contrato.errors.full_messages.each do |msg| %>
+			<li> <%= msg %> </li>
+		<% end %>
+	</ul>
+<% end %>
+
+<%= form_for(@contrato , :url => {:controller => "contratos" , :action => "add_contrato"}, :method => :post) do |f| %>
+	<%= render(:partial => "form", :locals => { :f => f }) %>
+<% end %>
+
+<p>
+	<%= link_to "Voltar" , :action => :index %>
+</p>
