@@ -22,7 +22,8 @@ function buscacep() {
         $("#lcep").html("Pesquisando...") //mostra na viw do form uma menssagem
         $.getScript("http://cep.republicavirtual.com.br/web_cep.php?formato=javascript&cep=" + $("#cep").val(), function() {
             if (resultadoCEP["resultado"] == "1") {
-                $("#endereco").val(unescape(resultadoCEP["tipo_logradouro"]) + unescape(resultadoCEP["logradouro"]));
+                $("#enderec").val(unescape(resultadoCEP["tipo_logradouro"]) + " " + unescape(resultadoCEP["logradouro"]));
+                $("#endereco").val(unescape(resultadoCEP["tipo_logradouro"]) + " " + unescape(resultadoCEP["logradouro"]));
                 $("#bairro").val(unescape(resultadoCEP["bairro"]));
                 $("#cidade").val(unescape(resultadoCEP["cidade"]));
                 $("#estado").val(unescape(resultadoCEP["uf"]));;
@@ -148,4 +149,3 @@ function validarCNPJ(cnpj) {
     return true;
 
 }
-

@@ -1,0 +1,51 @@
+<h3> Clientes </h3>
+
+<nav>
+	<ul>
+		<li>
+				<%= link_to("Adicionar funcionário", { :action => "add" }) %>
+		</li>
+		<li>
+			<%= form_tag( '/funcionarios', :method => :get) do %>
+				<%= text_field_tag :busca , params[:busca] %>
+				<%= submit_tag "Buscar", :name => nil %>
+			<% end %>
+		</li>
+	</ul>
+</nav>
+
+
+<table>
+	<tr>
+		<th> Nome </th>
+		<th> Data de admissão </th>
+		<th> Cargo </th>
+		<th> Situaçao </th>
+		<th> Ultima alteraçao </th>
+		<th></th>
+	</tr>
+	<% @funcionario.each do |f| %>
+		<tr>
+			<td> <%= f.nome %> </td>
+			<td> <%= date(f.dt_admissao) %></td>
+			<td> <%= f.cargo_nome %> </td>
+			<td> <%= status(f.status) %> </td>
+			<td> <%= datetime(f.updated_at) %> </td>
+			<td>
+				<%= link_to "Detalhes" , {:action => "detalhes", :funcionario_id => f.id } %>
+				<%= link_to "Editar" , { :action => "editar", :funcionario_id => f.id } %>
+				<% if f.status == false %>
+					<%= link_to "Inativar" , {:action => "situacao" , :funcionario_id => f.id , :acao => "inativar" } %>
+				<% else %>
+					<%= link_to "Ativar" , {:action => "situacao" , :funcionario_id => f.id , :acao => "ativar" } %>
+				<% end %>
+			</td>
+		</tr>
+	<% end %>
+</table>
+
+<p>
+	<center>
+		<%= will_paginate @funcionario %>
+	</center>	
+</p>

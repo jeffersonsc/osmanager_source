@@ -1,0 +1,57 @@
+<h3> Detalhes </h3>
+
+<%= link_to "Editar" , { :action => "editar", :tp_cliente => if @cliente[0].tp_cliente == true then "pf" else "pj" end , :cliente_id => @cliente[0].id } %>
+
+<h4> Cliente <%= situacao(@cliente[0].inativo) %> Status <%= status(@cliente[0].status) %> </h4>
+
+<% @cliente.each do |c| %>
+	<% if c.tp_cliente == true %>
+		<h4> Dados pessoais </h4>
+		<p>
+			Nome: <%= c.nome %> <br />
+			Sexo: <%= c.sexo %> <br />
+			Data de nascimento: <%= c.dt_nascimento %><br />
+			RG: <%= c.rg %>
+			CPF: <%= c.cpf %> <br />
+			Nome da mãe: <%= c.nome_mae %> <br />
+			Nome do pai: <%= c.nome_pai %>
+		</p>
+	<% else %>
+		<h4> Dados da empresa </h4>
+		<p>
+			Razão social: <%= c.nome %> <br />
+			Inscrição social: <%= c.ie %> <br />
+			CNPJ: <%= c.cnpj %> <br />
+			Nome do responsável: <%= c.nome_responsavel %> </br>
+		</p>
+	<% end %>
+	<p>
+		<p>
+			<strong> Logradouro </strong>
+		</p>
+		Endereço: <%= c.endereco %>, <%= c.numero %><br />
+		Complemento: <%= c.complemento %> <br />
+		CEP: <%= c.cep %> <br />
+		Bairro: <%= c.bairro %> <br />
+		Cidade: <%= c.cidade %> <br />
+		Estado: <%= c.estado %> <br />
+	</p>
+	<p>
+		<p>
+			<strong> Contato </strong>
+		</p>
+		Email: <%= c.email %> <br />
+		Telefone: <%= c.telefone1 %> <br />
+		Telefone: <%= c.telefone2 %> <br />
+		Telefone: <%= c.telefone3 %> <br />
+		Celular: <%= c.celular %> <br />
+	</p>
+	<p>
+		Criado em: <%= datetime(c.created_at) %> <br />
+		Última alteração: <%= datetime(c.updated_at) %>
+	</p>
+<% end %>
+
+<p>
+	<%= link_to "Voltar", { :action => :index } %>
+</p>

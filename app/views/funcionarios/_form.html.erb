@@ -1,0 +1,73 @@
+<div id="pf" class="pf">
+	<%= f.hidden_field :tp_cliente , :value => true %>
+	<%= f.label :nome , "Nome completo:" %>
+	<%= f.text_field :nome , :size => "40" , :id => "nome" %>
+
+	<br />
+	<%= f.label :sexo %>
+	<%= f.radio_button :sexo , 'm' , :id => "sexo" %>
+	<%= f.label :sexo , "Masculino" %>
+	<%= f.radio_button :sexo , 'f' , :id => "sexo" %>
+	<%= f.label :sexo , "Feminino" %>
+	<%= f.label "Data de nascimento:" %>
+	<%= f.text_field :dt_nascimento , :id => "dt_nascimento" %> <br />
+
+	<%= f.label :rg %>
+	<%= f.text_field :rg , :size => "10" , :id => "rg" %>
+	<%= f.label :ssp %>
+	<%= f.select :ssp , @ssp.map{|ssp| [ssp , ssp] } , :id => "ssp" , :include_blank => true %>
+	<%= f.label :cpf %>
+	<%= f.text_field :cpf , :size => "11" , :id => "cpf" , :onblur => "validarCPF(this.value);" %>
+	<%= f.label :naturalidade, "Local de nascimento" %>
+	<%= f.text_field :naturalidade , :size => "40" %> <br />
+	<%= f.label :nome_mae, "Nome da mãe" %>
+	<%= f.text_field :nome_mae , :size => "40" , :id => "nome_mae" %>
+	<%= f.label :nome_mae, "Nome do pai" %>
+	<%= f.text_field :nome_pai , :size => "40" , :id => "nome_pai" %>
+</div>
+
+
+<div id="endereco" >
+	<%= f.label :cep %>
+	<%= f.text_field :cep , :size => "8" , :maxlegth => "8" , :id => "cep" , :onblur => "buscacep(this.value)" , :onchanged => "limpacampos()" %>
+	<%= f.label " ", :id => "lcep" %>
+	<%= link_to_function "Localizar endereço" , "window.open('http://www.buscacep.correios.com.br/', 'Busca de CEP', 'width=1024, height=600');" %> <br />
+	<%= f.label :endereco , "Endereço"%>
+	<%= f.text_field :endereco , :size => "35" , :id => "enderec" %>
+	<%= f.label :numero , "Número" %>
+	<%= f.number_field :numero , :id => "numero" , :id => "numero"%>
+	<%= f.label :complemento %>
+	<%= f.text_field :complemento , :id => "complemento" %>	<br />
+	<%= f.label :bairro %>
+	<%= f.text_field :bairro , :size => "20" , :id => "bairro" %>
+	<%= f.label :cidade %>
+	<%= f.text_field :cidade , :size => "20" , :id => "cidade" %>
+	<%= f.label :estado %>
+	<%= f.text_field :estado , :size => "2" , :id => "estado"%>
+</div>
+<div>
+	<%= f.label :cargo_id, "Cargo" %>
+	<%= f.select :cargo_id, options_for_select(@cargo.map{|cg| [cg.nome , cg.id ]}) %>
+	<%= f.label :dt_admissao, "Data de admissão" %>
+	<%= f.date_select :dt_admissao %>
+</div>
+<div id="dados">
+	<%= f.label :email %>
+	<%= f.email_field :email , :size => "40" , :id => "email" %> <br />
+	<%= f.label :telefone1 , "Telefone 1"%>
+	<%= f.text_field :telefone , :id => "telefone" %> <br />
+	<%= f.label :celular , "Celular"%>
+	<%= f.text_field :celular , :id => "celular"%>
+</div>
+
+<% javascript_include_tag "jquery.maskedinput"%>
+
+<script>
+	jQuery(function($){
+		$("#cpf").mask("999.999.999-99");
+		$("#cep").mask("99999-999");
+		$("#dt_nascimento").mask("99/99/9999");
+		$("#telefone").mask("(99) 9999-9999");
+		$("#celular").mask("(99) 99999-9999");
+	});
+</script>

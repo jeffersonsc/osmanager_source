@@ -31,6 +31,8 @@ CREATE TABLE arquivos (
 	id SERIAL PRIMARY KEY,
 	contrato_id INTEGER REFERENCES contratos(id),
 	contrato_bin BYTEA,
+	content_type VARCHAR,
+	filename VARCHAR,
 	status BOOLEAN DEFAULT false,
 	created_at TIMESTAMP DEFAULT now()
 );

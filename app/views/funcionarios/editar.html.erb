@@ -1,0 +1,20 @@
+<h3> Editar funcionario </h3>
+
+<% if @funcionario.errors.any? %>
+	<h2><%= pluralize(@funcionario.errors.count, "erro") %> foram encontrado:</h2>
+	<ul>
+		<% @funcionario.errors.full_messages.each do |msg| %>
+			<li> <%= msg %> </li>
+		<% end %>
+	</ul>
+<% end %>
+
+<%= form_for(@funcionario , :url => {:controller => "funcionarios" , :action => "add_funcionario" , :funcionario_id => params[:funcionario_id]}, :method => :post) do |f| %>
+	<%= render(:partial => "form" , :locals => {:f => f})%>
+	<%= f.submit "Salvar" %>
+<% end %>
+
+
+<p>
+	<%= link_to "Voltar", :action => "index" %>
+</p>
