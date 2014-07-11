@@ -1,5 +1,15 @@
-<h4> Editar </h4>
+<h4> Editar contrato </h4>
 
+<p>
+	<strong> Situação do contrato <%= situacao_contrato(@contrato.situacao) %> </strong>
+</p>
+<p>
+	<%= form_tag({:action => "situacao_contrato" , :contrato_id => params[:contrato_id]} , :method => :post) do %>
+		<%= label_tag :situacao, "Aletar situação do contrato para: "%>
+		<%= select_tag :situacao , options_for_select([["Cotação", "cotacao"], ["Aberto" , "aberto"] , ["Cancelado" , "cancelado"]]) , :value => @contrato.situacao %>
+		<%= submit_tag "Alterar" %>
+	<% end %>
+<p>
 
 <%= form_for(@contrato , :url => {:controller => "contratos" , :action => "update" , :contrato_id => params[:contrato_id]}, :multpart => true ,:method => :post) do |f| %>
 	<%= render(:partial => "form", :locals => { :f => f }) %>
@@ -7,6 +17,29 @@
 		<%= f.submit "Salvar" %>
 	</p>
 <% end %>
+
+<div>
+	<strong> Importar arquivo </strong>
+	<%= render("form_file") %>
+	<p>
+		<strong> Arquivos importados </strong>
+	</p>
+	<table>
+		<tr>
+			<th> Nome do arquivo </th>
+			<th></th>
+		</tr>
+		<% @contrato_file.each do |cf| %>
+			<tr>
+				<td> <%= cf.filename %> </td>
+				<td>
+					<%= link_to "Download", {:action => "download_contrato" , :contrato_id => cf.contrato_id , :file_id => cf.id } %>
+					<%= link_to "Remover" , {:action => "remover_contrato_file" , :contrato_id => cf.contrato_id , :file_id => cf.id } %>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+</div>
 
 <p>
 	<%= link_to "Voltar" , :action => :index %>

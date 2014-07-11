@@ -34,4 +34,14 @@ module ApplicationHelper
 	def time(time)
 		time.strftime("%H:%M")
 	end
+
+	def situacao_contrato(value)
+		if value == "cotacao"
+			return "Cotação"
+		elsif value == "aberto"
+			return "Aberto"
+		elsif value == "cancelado"
+			return "Cancelado"
+		end
+	end
 end

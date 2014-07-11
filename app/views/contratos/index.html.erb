@@ -4,29 +4,37 @@
 	<ul>
 		<li> <%= link_to "Novo Contrato" , {:controller => "contratos", :action => "add"} %> </li>
 		<li> <%= link_to "Tipos Contrato" , {:controller => "tipos_contratos", :action => "index"} %> </li>
+		<li>
+			<%= form_tag( '/contratos', :method => :get) do %>
+				<%= text_field_tag :busca , params[:busca] %>
+				<%= submit_tag "Buscar", :name => nil %>
+			<% end %>
+		</li>
 	</ul>
 </nav>
 
 <table>
 	<tr>
+		<th> Código </th>
 		<th> Cliente </th>
 		<th> Tipo de contrato </th>
 		<th> Valido até </th>
 		<th> Situação </th>
-		<th> Status </th>
 		<th></th>
 	</tr>
 	<% @contratos.each do |c| %>
 		<tr>
+			<td> <%= c.id %> </td>
 			<td> <%= c.cliente_nome %> </td>
 			<td> <%= c.tp_contrato_nome %> </td>
 			<td> <%= date(c.validade) %> </td>
-			<td> <%= c.situacao %> </td>
-			<td> <%= status(c.status) %> </td>
+			<td> <%= situacao_contrato(c.situacao) %> </td>
 			<td>
-				<%= link_to("Editar" , :action => "editar" , :contrato_id => c.id ) %>
-				<%= link_to ""%>
+				<%= link_to("Editar" , { :action => "editar" , :contrato_id => c.id } ) %>
+				<%= link_to "Remover" , { :action => "remove_contrato" , :contrato_id => c.id } , data: {confirm: 'Ao remover este contrato todas indromações relacionadas serão removidas' } %>
 			</td>
 		</tr>
 	<% end %>
 </table>
+
+<%= will_paginate @contratos %>

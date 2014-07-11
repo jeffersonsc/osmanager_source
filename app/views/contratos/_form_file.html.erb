@@ -1,0 +1,11 @@
+<%= form_tag({:action => "importar_contrato", :contrato_id => params[:contrato_id]}, :multipart => true) do %>
+	<table>
+		<tr>
+			<td> Contrato arquivo </td>
+			<td> <%= file_field_tag :contrato_file %> </td>
+		</tr>
+		<tr>
+		<td> <%= submit_tag "Adicionar contrato" %> </td>
+		</tr>
+	</table>
+<% end %>

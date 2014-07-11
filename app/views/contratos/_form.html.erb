@@ -1,23 +1,19 @@
 <table>
 	<tr>
 		<td> Cliente </td>
-		<td> <%= f.select :cliente_id , options_for_select(@cliente.map { |cli| [cli.nome , cli.id]  }), :include_blank => true %> </td>
+		<td> <%= f.select :cliente_id , options_for_select(@cliente.map { |cli| [cli.nome , cli.id]  }) %> </td>
 	</tr>
 	<tr>
 		<td> Tipo de contrato </td>
-		<td> <%= f.select :tipos_contrato_id , options_for_select(@tp_contrato.map { |tc| [tc.nome , tc.id]  }), :include_blank => true %> </td>
+		<td> <%= f.select :tipos_contrato_id , options_for_select(@tp_contrato.map { |tc| [tc.nome , tc.id]  }) %> </td>
 	</tr>
 	<tr>
 		<td> Valor do contrato </td>
-		<td> <%= f.text_field :valor %> </td>
+		<td> <%= f.text_field :valor %> <%= f.select :tipo_pagamento_contrato_id , options_for_select(@tp_pagamento.map { |tpg| [tpg.nome , tpg.id]  }) %> </td>
 	</tr>
 	<tr>
 		<td> Duração do contrato </td>
 		<td> <%= f.date_select( :validade, :start_year => Date.current.year, :end_year=> 2030, :order => [:day, :month, :year]) %></td>
-	</tr>
-	<tr>
-		<td> Contrato arquivo </td>
-		<td> <%= f.file_field :contrato_file %> </td>
 	</tr>
 	<tr>
 		<td> Descrição: </td>
