@@ -1,0 +1,96 @@
+<h4> Detalhe do chamado <%= @chamado.id %> </h4>
+
+
+<% if @chamado.status == false %>
+	<strong> Chamado criado por <%= funcionario(@chamado.funcionario_id) %> Ás <%= datetime(@chamado.created_at) %> </strong>
+	<table border=1>
+		<%= form_for(@historico, :url => {:controller => "chamados" , :action => "atualizar_chamado" , :chamado_id => @chamado.id }, :method => :post) do |f| %>
+			<tr>
+				<td> Cliente: </td>
+				<td> <%= select_tag :cliente_id , options_for_select(@cliente.map{|cl| [cl.nome , cl.id] }) %> </td>
+			</tr>
+			<tr>
+				<td> Serviço: </td>
+				<td> <%= select_tag :servico_id , options_for_select(@servico.map{|sr| [sr.nome , sr.id] }) %> </td>
+				<td> Situação: </td>
+				<td> <%= select_tag :status , options_for_select([["Aberto","false"],["Fechado","true"]]) %> </td>
+			</tr>
+			<tr colspan=4>
+				<td> Atribuido para: </td>
+				<td> <%= select_tag :atribuido_para , options_for_select(@funcionario.map{|f| [f.nome , f.id] })%> </td>
+			</tr>
+			<tr>
+				<td> Descrição: </td>
+				<td colspan=4>
+					<div style="width: 550px; height: 40px; background-color: #EEE8AA;">
+						<%= @chamado.descricao %> 
+					</div>				
+				</td>
+			</tr>
+			<tr>
+				<td colspan=4> Historico: </td>
+			</tr>
+			<tr>
+				<td colspan=4> <%= f.text_area :historico, :size => "80x5" %> </td>
+			</tr>
+			<tr>
+				<td> <%= f.submit "Atualizar chamado" %> </td>
+			</tr>
+		<% end %>
+	</table>
+	<table>
+		<% if @historico_chamados.size > 0 %>
+			<% @historico_chamados.each do |h| %>
+				<tr>
+					<td>
+						<div style="width: 550px; background-color: #C0C0C0;">
+							<%= h.historico %> <br />
+							<strong> Criado por: <%= funcionario(h.funcionario_id) %> </strong>
+						</div>
+					</td>
+				</tr>
+			<% end %>
+		<% end %>
+	</table>
+<% else %>
+	<table border=1>
+		<tr>
+			<td> Cliente: </td>
+			<td colspan=3> <%= @cliente[0].nome %> </td>
+		</tr>
+		<tr>
+			<td> Serviço: </td>
+			<td> <%= @servico[0].nome %> </td>
+			<td> Situação: </td>
+			<td> <%= situacao_chamado(@chamado.status) %> </td>
+		</tr>
+		<tr>
+			<td> Atribuido para: </td>
+			<td colspan=3> <%= funcionario(@chamado.atribuido_para) %> </td>
+		</tr>
+		<tr>
+			<td> Descrição </td>
+			<td colspan=3>
+				<div style="width: 550px; height: 40px; background-color: #EEE8AA;">
+					<%= @chamado.descricao %> 
+				</div>
+			</td>
+		</tr>
+	</table>
+	<table>
+		<% @historico_chamados.each do |h| %>
+			<tr>
+				<td>
+					<div style="width: 550px; background-color: #C0C0C0;">
+						<%= h.historico %> <br />
+						<strong> Criado por: <%= funcionario(h.funcionario_id) %> </strong>
+					</div>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+<% end %>
+
+<p>
+	<%= link_to "Voltar" , {:action => "index"} %> 
+</p>

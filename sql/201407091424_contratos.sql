@@ -12,6 +12,14 @@ INSERT INTO tipos_pagamento_contrato (nome) VALUES ('Trimestral');
 INSERT INTO tipos_pagamento_contrato (nome) VALUES ('Semestral');
 INSERT INTO tipos_pagamento_contrato (nome) VALUES ('Anual');
 
+CREATE TABLE tipos_contrato(
+	id SERIAL PRIMARY KEY,
+	nome VARCHAR,
+	descricao VARCHAR,
+	status BOOLEAN DEFAULT false,
+	created_at TIMESTAMP DEFAULT now()
+);
+
 CREATE TABLE contratos (
 	id SERIAL PRIMARY KEY,
 	cliente_id INTEGER REFERENCES clientes(id),
@@ -19,9 +27,9 @@ CREATE TABLE contratos (
 	tipo_pagamento_contrato_id INTEGER REFERENCES tipos_pagamento_contrato(id),
 	funcionario_id INTEGER,
 	validade TIMESTAMP,
-	valor DECIAMAL(10,2),
+	valor DECIMAL(10,2),
 	descricao TEXT,
-	stituacao VARCHAR DEFAULT 'cotacao',
+	situacao VARCHAR DEFAULT 'cotacao',
 	status BOOLEAN DEFAULT false,
 	created_at TIMESTAMP DEFAULT now(),
 	updated_at TIMESTAMP

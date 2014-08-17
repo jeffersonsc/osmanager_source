@@ -3,6 +3,7 @@ BEGIN;
 CREATE TABLE cargos (
 	id SERIAL PRIMARY KEY,
 	nome VARCHAR,
+	descricao VARCHAR,
 	status BOOLEAN DEFAULT false,
 	created_at TIMESTAMP DEFAULT now(),
 	updated_at TIMESTAMP
@@ -32,6 +33,8 @@ CREATE TABLE funcionarios (
 	status BOOLEAN DEFAULT false,
 	cargo_id integer REFERENCES cargos(id),
 	dt_admissao TIMESTAMP,
+	usuario VARCHAR,
+	senha VARCHAR,
 	created_at TIMESTAMP DEFAULT now(),
 	updated_at TIMESTAMP
 );

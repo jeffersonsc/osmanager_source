@@ -1,9 +1,12 @@
-<h3> Clientes </h3>
+<h3> Funcionários </h3>
 
 <nav>
 	<ul>
 		<li>
 				<%= link_to("Adicionar funcionário", { :action => "add" }) %>
+		</li>
+		<li>
+				<%= link_to("Novo cargo", { :controller => "cargos" , :action => "add" }) %>
 		</li>
 		<li>
 			<%= form_tag( '/funcionarios', :method => :get) do %>
@@ -27,7 +30,7 @@
 	<% @funcionario.each do |f| %>
 		<tr>
 			<td> <%= f.nome %> </td>
-			<td> <%= date(f.dt_admissao) %></td>
+			<td> <%= f.dt_admissao %></td>
 			<td> <%= f.cargo_nome %> </td>
 			<td> <%= status(f.status) %> </td>
 			<td> <%= datetime(f.updated_at) %> </td>

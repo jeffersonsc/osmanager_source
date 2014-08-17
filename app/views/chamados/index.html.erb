@@ -1,0 +1,67 @@
+<h3> Chamados </h3>
+
+<nav>
+	<ul>
+		<li> <%= link_to "Novo chamado" , { :action => "add_chamado" } %> </li>
+		<li>
+			<%= form_tag( '/chamados', :method => :get) do %>
+				<%= text_field_tag :busca , params[:busca] %>
+				<%= submit_tag "Buscar", :name => nil %>
+			<% end %>
+		</li>
+	</ul>
+</nav>
+
+<div>
+	<strong> Buscar cliente </strong>
+	<%= form_tag( '/chamados', :method => :get) do %>
+		<%= text_field_tag :busca_cliente , params[:busca_cliente] %>
+		<%= submit_tag "Buscar", :name => nil %>
+	<% end %>
+	<table cellspacing="0" cellpadding="0">
+		<tr>
+			<th> Código </th>
+			<th> Nome/Razão Social </th>
+			<th> Tipo Cliente </th>
+			<th> </th>
+		</tr>
+		<% @cliente.each do |cl| %>
+			<tr>
+				<td> <%= cl.id %> </td>
+				<td> <%= cl.nome %> </td>
+				<td> <%= cliente(cl.tp_cliente) %> </td>
+				<td> <%= link_to "Criar chamado" , {:action => "add_chamado" , :cliente_id => cl.id } %> </td>
+			</tr>		
+		<% end %>
+	</table>
+</div>
+
+<div>
+	<p>
+		<strong> Chamados Abertos </strong>
+	</p>
+	<table cellspacing="0" cellpadding="0">
+		<tr>
+			<th class="border_radius_left"> Código </th>
+			<th> Nome/razaão social </th>
+			<th> Tipo de chamado </th>
+			<th> Aberto por </th>
+			<th> Atribuído para </th>
+			<th> Status </th>
+			<th> Aberto as </th>
+			<th class="border_radius_right"></th>
+		</tr>
+		<% @chamados.each do |c| %>
+			<tr class="tr" style="background-color: <%= color(c.status , c.atribuido_para , c.agendamento , c.hora_saida) %>">
+				<td> <%= c.id %> </td>
+				<td> <%= c.cliente_nome %> </td>
+				<td> <%= c.servico_nome %> </td>
+				<td> <%= funcionario(c.funcionario_id) %> </td>
+				<td> <%= funcionario(c.atribuido_para) %> </td>
+				<td> <%= status_chamado(c.status , c.atribuido_para , c.agendamento , c.hora_saida ) %> </td>
+				<td> <%= datetime(c.created_at) %> </td>
+				<td> <%= link_to "Detalhes" , {:action => "detalhes" , :chamado_id => c.id } , {:class => "link2"} %> </td>
+			</tr>
+		<% end %>
+	</table>
+</div>

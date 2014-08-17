@@ -33,4 +33,36 @@ nav form {
   padding: 5px 10px 5px;
 }
 
+th {
+	background-color: #848484;
+	border: solid 1px #000;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.border_radius_left {
+	border-top-left-radius: 20px;
+	border: 1px solid #000;
+	height: 8px;
+	margin: 10px;
+	padding: 3px; 
+}
+.border_radius_right {
+	border-top-right-radius: 20px; 
+	height: 8px;
+	border: 1px solid #000;
+	padding-left: 3px;
+}
+
+.tr :hover {
+	background: #fff;
+}
+
+
+.link2 {
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+	cursor: pointer;
+}
 

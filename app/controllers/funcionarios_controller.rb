@@ -16,7 +16,7 @@ class FuncionariosController < ApplicationController
 		@funcionario = Funcionario.new(funcionario_params)
 		if @funcionario.save
 			flash[:notice] = "Funcionario criado com sucesso"
-			redirect_to :action => :index
+			redirect_to :action => :editar, :funcionario_id => @funcionario.id
 		else
 			@ssp = ["AC","AL", "AP", "AM", "BA", "CE", "DF" , "ES" , "GO" ,
 						"MA" , "MT" , "MS" , "MG" , "PA" , "PB" , "PR" , "PE" ,
@@ -70,6 +70,23 @@ class FuncionariosController < ApplicationController
 			@funcionario.update_attributes(:status => sql)
 			flash[:notice] = "#{msg}"
 			redirect_to :action => :index
+	end
+
+	def criar_login
+		if params[:usuario].blank?
+			flash[:error] = "O campo usuáro não pode ficar em branco"
+			redirect_to :back
+		else
+			@login = Funcionario.gera_login(params[:usuario] , params[:funcionario_id])
+			flash[:notice] = "Usuario criado com sucesso"
+			redirect_to :back
+		end
+	end
+
+	def resaturar_senha
+		@login = Funcionario.senha_padrao(params[:funcionario_id])
+		flash[:notice] = "Senha restaurada para padrão"
+		redirect_to :back
 	end
 
 	private

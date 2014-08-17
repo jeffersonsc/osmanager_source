@@ -5,8 +5,10 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  
 </head>
 <body>
+	
 	<header>
 		<% flash.each do |key , msg| %>
 			<div class="flash <%= key %>" id="flash">
@@ -14,18 +16,26 @@
 			</div>
 		<% end %>
 	</header>
-	<nav>
-		<ul>
-			<li> <%= link_to "Menu" , "#" %> </li>
-			<li> <%= link_to "Clientes" , {:controller => "cliente", :action => "index"} %> </li>
-			<li> <%= link_to "Contratos" , {:controller => "contratos", :action => "index"} %> </li>
-			<li> <%= link_to "Serviços" , "#" %> </li>
-			<li> <%= link_to "Chamados" , "#" %> </li>
-			<li> <%= link_to "Produtos" , "#" %> </li>
-		</ul>
-	</nav>
-
-<%= yield %>
+	<% if not session[:usuario_id].nil? %>
+		<nav>
+			<ul>
+				<li> <%= link_to "Menu" , "#" %> </li>
+				<li> <%= link_to "Clientes" , {:controller => "cliente", :action => "index"} %> </li>
+				<li> <%= link_to "Contratos" , {:controller => "contratos", :action => "index"} %> </li>
+				<li> <%= link_to "Serviços" , "#" %> </li>
+				<li> <%= link_to "Chamados" , {:controller => "chamados" , :action => "index"} %> </li>
+				<li> <%= link_to "Funcionários" , {:controller => "funcionarios" , :action => "index"} %> </li>
+				<li> <%= link_to "Produtos" , "#" %> </li>
+			</ul>
+		</nav>
+		<p>
+			IP: <%= "127.0.0.1" %> <br />
+			Usuario logado: <%= current_user.nome %>
+		</p>
+		<article>
+	<% end %>
+		<%= yield %>
+	</article>		
 
 </body>
 </html>

@@ -1,0 +1,19 @@
+<h4> Novo tipo </h4>
+
+<% if @cargo.errors.any? %>
+	<h3><%= pluralize(@cargo.errors.count, "erro") %> foram encontrado:</h3>
+	<ul>
+		<% @cargo.errors.full_messages.each do |msg| %>
+			<li> <%= msg %> </li>
+		<% end %>
+	</ul>
+<% end %>
+
+<%= form_for(@cargo , :url => {:controller => "cargos" , :action => "create"}, :method => :post) do |f| %>
+	<%= render(:partial => "form", :locals => { :f => f }) %>
+	<p>
+		<%= f.submit "Salvar" %>
+	</p>
+<% end %>
+
+<%= link_to "Voltar" , :action => "index" %>

@@ -1,0 +1,35 @@
+<h4> Tipos de contrato </h4>
+
+<nav>
+	<ul>
+		<li> <%= link_to "Novo cargo" , {:controller => "cargos", :action => "add"} %> </li>
+	</ul>
+</nav>
+
+<table>
+	<tr>
+		<th> Nome </th>
+		<th> Status </th>
+		<th> Descrição </th>
+		<th></th>
+	</tr>
+	<% @cargo.each do |cg| %>
+		<tr>
+			<td> <%= cg.nome %> </td>
+			<td> <%= status(cg.status) %> </td>
+			<td> <%= cg.descricao %> </td>
+			<td>
+				<%= link_to "Editar" , {:action => "editar" , :cargo_id => cg.id } %> 
+				<% if cg.status == false %>
+					<%= link_to "Bloquear" , {:action => "status" , :acao => true , :cargo_id => cg.id} %>
+				<% else %>
+					<%= link_to "Desbloquear" , {:action => "status" , :acao => false , :cargo_id => tp.id } %>
+				<% end %>
+			</td>
+		</tr>
+	<% end %>
+</table>
+
+<p>
+	<%= link_to "Voltar", {:controller => "funcionarios" , :action => "index"} %>
+</p>

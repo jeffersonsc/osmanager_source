@@ -14,6 +14,18 @@
 	<%= f.submit "Salvar" %>
 <% end %>
 
+<p>
+
+	<strong> Gera login </strong>
+	<br />
+	<% if not @funcionario.senha.nil? %>
+		<%= link_to "Restaurar senha" , {:action => "resaturar_senha" , :funcionario_id => @funcionario.id } %>
+	<% end %>
+	<%= form_tag({:action => "criar_login" , :funcionario_id => @funcionario.id }, :method => :post) do %>
+		Usuario: <%= text_field_tag :usuario ,  @funcionario.usuario %> <br />
+		<%= submit_tag "Criar usuário" %>
+	<% end %>
+</p>
 
 <p>
 	<%= link_to "Voltar", :action => "index" %>
