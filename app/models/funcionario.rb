@@ -62,10 +62,16 @@ class Funcionario < ActiveRecord::Base
 		end
 	end
 
-	def self.gera_login(usuario , funcionario_id)		
+	def self.gera_login(usuario , funcionario_id)
 		funcionario = Funcionario.where("id = ?", funcionario_id)[0]
 		senha = Digest::MD5.hexdigest(usuario + "1234")
-		funcionario.update_attributes(:usuario => usuario , :senha => senha)		
+		funcionario.update_attributes(:usuario => usuario , :senha => senha)
+	end
+
+	def self.trocar_senha(usuario , senha_antiga , funcionario_id)
+		funcionario = Funcionario.where("id = ?", funcionario_id)[0]
+		senha = Digest::MD5.hexdigest(usuario + senha_antiga)
+		funcionario.update_attributes(:senha => senha)
 	end
 
 	def self.senha_padrao(funcionario_id)

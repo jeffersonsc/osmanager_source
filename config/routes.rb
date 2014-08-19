@@ -4,6 +4,7 @@ Osmanager::Application.routes.draw do
 
   match ':controller(/:action(/:id(.:format)))' , :via => [:get , :post , :put]
 
+  get '/sair' => 'login#logout' , :as => 'sair'
 
 
   # You can have the root of your site routed with "root"

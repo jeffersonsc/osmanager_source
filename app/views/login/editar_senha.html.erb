@@ -1,0 +1,9 @@
+<h1> Trocar senha </h1>
+
+<div class="login">
+	<%= form_tag({:action => "alterar_senha" , :funcionario_id => @login.id}, :method => :post) do %>
+		Senha: <%= password_field_tag :senha %> <br />
+		Confimação: <%= password_field_tag :senha_confirm %> <br />
+		<%= submit_tag "Trocar" %>
+	<% end %>
+</div>
