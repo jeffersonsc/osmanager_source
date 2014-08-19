@@ -1,4 +1,5 @@
 class CargosController < ApplicationController
+	before_filter :authorize
 	def index
 		@cargo = Cargo.all
 	end

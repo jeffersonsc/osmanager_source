@@ -1,5 +1,5 @@
 class ClienteController < ApplicationController
-
+	before_filter :authorize
 	def index
 		@cliente = Cliente.buscar(params[:busca]).paginate(:page => params[:page] , :per_page => 20)
 	end

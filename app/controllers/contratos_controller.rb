@@ -1,5 +1,6 @@
 class ContratosController < ApplicationController
-
+	before_filter :authorize
+	
 	def index
 		@contratos = Contrato.buscar(params[:busca] , params[:page])
 	end

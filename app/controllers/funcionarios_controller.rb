@@ -1,5 +1,6 @@
 class FuncionariosController < ApplicationController
 
+	before_filter :authorize
 	def index
 		@funcionario = Funcionario.buscar(params[:busca] , params[:page])
 	end

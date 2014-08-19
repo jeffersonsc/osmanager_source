@@ -1,5 +1,6 @@
 class ServicosController < ApplicationController
 	
+	before_filter :authorize
 	def index
 		@servico = Servico.all		
 	end

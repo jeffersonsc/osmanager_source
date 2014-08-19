@@ -1,5 +1,5 @@
 class ChamadosController < ApplicationController
-	
+	before_filter :authorize
 	def index
 		@cliente = Cliente.buscar(params[:busca_cliente]).paginate(:page => params[:page] , :per_page => 10).order("id")
 

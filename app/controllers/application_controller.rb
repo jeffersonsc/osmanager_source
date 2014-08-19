@@ -7,8 +7,20 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   private
 
+  def authorize
+    puts "================ authorize =================="
+    puts @current_user
+  	if session[:usuario_id].blank?
+  		flash[:error] = "Voce não está logado"
+  		redirect_to root_url
+  	end
+  end
+
   def current_user
-    puts "==========="
-    @current_user ||= Usuario.find(session[:usuario_id]) if session[:usuario_id]
+    puts "=================================="
+    puts session[:usuario_id]
+    bolinha = Funcionario.where("id = ?" , session[:usuario_id])[0]
+    puts bolinha
+    @current_user ||= Funcionario.where("id = ?" , session[:usuario_id])[0] if session[:usuario_id]
   end
 end

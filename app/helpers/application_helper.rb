@@ -32,7 +32,7 @@ module ApplicationHelper
 	end
 
 	def datetime(datetime)
-		datetime.strftime("%d/%m/%Y - %H:%M")
+		datetime.strftime("%d/%m/%Y - %H:%M")  if not datetime.blank?
 	end
 
 	def date(date)

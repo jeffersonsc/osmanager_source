@@ -9,7 +9,7 @@
 	</ul>
 <% end %>
 
-<%= form_for(@funcionario , :url => {:controller => "funcionarios" , :action => "add_funcionario" , :funcionario_id => params[:funcionario_id]}, :method => :post) do |f| %>
+<%= form_for(@funcionario , :url => {:controller => "funcionarios" , :action => "update" , :funcionario_id => params[:funcionario_id]}, :method => :post) do |f| %>
 	<%= render(:partial => "form" , :locals => {:f => f})%>
 	<%= f.submit "Salvar" %>
 <% end %>

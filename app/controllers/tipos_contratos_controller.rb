@@ -1,5 +1,5 @@
 class TiposContratosController < ApplicationController
-
+	before_filter :authorize
 	def index
 		@tp_contrato = TipoContrato.all
 	end
