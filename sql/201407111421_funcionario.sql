@@ -39,5 +39,6 @@ CREATE TABLE funcionarios (
 	updated_at TIMESTAMP
 );
 
+INSERT INTO funcionarios (name , usuario , senha) VALUES ('Administrador' , 'admin' , 'admin');
 
 COMMIT;
