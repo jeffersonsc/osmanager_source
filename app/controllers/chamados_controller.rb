@@ -47,12 +47,12 @@ class ChamadosController < ApplicationController
 	end
 
 	def detalhes
-		@funcionario = Funcionario.all
-		@historico = HistoricoChamado.new
 		@chamado = Chamado.where("id = ?", params[:chamado_id])[0]
 		@cliente = Cliente.where("id = ?", @chamado.cliente_id)
 		@servico = Servico.where("id = ?", @chamado.servico_id)
 		@historico_chamados = HistoricoChamado.where("chamado_id = ?", @chamado.id)
+		@funcionario = Funcionario.all
+		@historico = HistoricoChamado.new
 	end
 
 	def atualizar_chamado

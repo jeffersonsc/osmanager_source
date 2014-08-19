@@ -1,43 +1,13 @@
 <h3> Novo chamado </h3>
 
 <table>
-	<%= form_for(@chamado, :url => {:controller => "chamados" ,:action => "create"} , :method => :post) do |f| %>
-		<tr>
-			<td> Cliente: </td>
-			<td> <%= f.select :cliente_id , options_for_select(@cliente.map { |cli| [cli.nome , cli.id]  }) %> </td>
-		</tr>
-		<tr>
-			<td> Tipos de chamado: </td>
-			<td> <%= f.select :servico_id , options_for_select(@servico.map { |ch| [ch.nome , ch.id]  }) %> </td>
-		</tr>
-		<tr>
-			<td> Atribuir para: </td>
-			<td> <%= f.select :atribuido_para , options_for_select([["",""]] + @funcionario.map { |fun| [fun.nome , fun.id]  }) %></td>
-		</tr>
-		<tr>
-			<td> Solicitante: </td>
-			<td>
-				<%= f.text_field :solicitante %>
-				Telefone contato:
-				<%= f.text_field :tel_contato , :id => "contato" %>
-			</td>
-		</tr>
-		<tr>
-			<td> Descrição> </td>
-			<td> <%= f.text_area :descricao , :size => "40x3" %> </td>
-		</tr>
-		<tr>
-			<td> Agendar atendimento </td>
-			<td> <%= f.check_box :agendamento %> </td>
-		</tr>
-		<tr>
-			<td> Horário da Saída </td>
-			<td> <%= f.datetime_select :hora_saida , :order =>  [:day, :month, :year, :hour, :minute]%> </td>
-		</tr>
-		<tr>
-			<td> <%= f.submit "Abrir chamado" %> </td>
-		</tr>
-	<% end %>
+	<tr>
+		<td>
+			<%= form_for(@chamado, :url => {:controller => "chamados" ,:action => "create"} , :method => :post) do |f| %>
+				<%= render(:patial => "form" , :locals => {:f => f}) %>
+			<% end %>
+		</td>
+	</tr>
 </table>
 
 <% javascript_include_tag "jquery.maskedinput"%>
