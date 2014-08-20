@@ -4,7 +4,7 @@
 	<tr>
 		<td>
 			<%= form_for(@chamado, :url => {:controller => "chamados" ,:action => "create"} , :method => :post) do |f| %>
-				<%= render(:patial => "form" , :locals => {:f => f}) %>
+				<%= render(:partial => "form" , :locals => {:f => f}) %>
 			<% end %>
 		</td>
 	</tr>

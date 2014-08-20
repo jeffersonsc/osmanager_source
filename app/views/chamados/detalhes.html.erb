@@ -17,7 +17,11 @@
 			</tr>
 			<tr colspan=4>
 				<td> Atribuido para: </td>
-				<td> <%= select_tag :atribuido_para , options_for_select(@funcionario.map{|f| [f.nome , f.id] }) if @funcionario %> </td>
+				<td>
+					<select name="atribuido_para">
+						<%= options_for_select(@funcionarios.map { |fun| [fun.nome , fun.id] }) %>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td> Descrição: </td>

@@ -21,8 +21,6 @@ class ChamadosController < ApplicationController
 			ORDER BY
 				chamados.id"				
 		@chamados = Chamado.find_by_sql(sql)
-		puts "======================== chamados =============="
-		puts @chamados
 	end
 
 	def add_chamado
@@ -37,7 +35,19 @@ class ChamadosController < ApplicationController
 	end
 
 	def create
-		@chamado = Chamado.new(chamado_params)
+		@chamado = Chamado.new
+		@chamado.cliente_id = params[:chamado][:cliente_id] if params[:chamado][:cliente_id]
+		@chamado.servico_id = params[:chamado][:servico_id] if params[:chamado][:servico_id]
+		@chamado.funcionario_id = @current_user.id
+		@chamado.atribuido_para = params[:chamado][:atribuido_para] if params[:chamado][:atribuido_para]
+		@chamado.descricao = params[:chamado][:descricao] if params[:chamado][:descricao]
+		@chamado.agendamento = params[:chamado][:agendamento] if params[:chamado][:agendamento]
+		if params[:chamado][:agendamento] == true
+			@chamado.hora_saida = params[:chamado][:hora_saida] if params[:chamado][:hora_saida]
+		end
+		@chamado.solicitante = params[:chamado][:solicitante] if params[:chamado][:solicitante]
+		@chamado.tel_contato = params[:chamado][:tel_contato] if params[:chamado][:tel_contato]
+
 		if @chamado.save
 			flash[:notice] = "Chamado criado com sucesso!"
 			redirect_to(:action => "detalhes" , :chamado_id => @chamado.id)
@@ -47,12 +57,15 @@ class ChamadosController < ApplicationController
 	end
 
 	def detalhes
+		@funcionarios = Funcionario.all
 		@chamado = Chamado.where("id = ?", params[:chamado_id])[0]
 		@cliente = Cliente.where("id = ?", @chamado.cliente_id)
 		@servico = Servico.where("id = ?", @chamado.servico_id)
 		@historico_chamados = HistoricoChamado.where("chamado_id = ?", @chamado.id)
-		@funcionario = Funcionario.all
 		@historico = HistoricoChamado.new
+
+		puts "=========================== chamado controller ======================"
+		puts @funcionarios.map{|fun| [fun.nome , fun.id] }
 	end
 
 	def atualizar_chamado
