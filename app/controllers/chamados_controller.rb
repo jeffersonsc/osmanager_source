@@ -63,41 +63,19 @@ class ChamadosController < ApplicationController
 		@servico = Servico.where("id = ?", @chamado.servico_id)
 		@historico_chamados = HistoricoChamado.where("chamado_id = ?", @chamado.id)
 		@historico = HistoricoChamado.new
-
-		puts "=========================== chamado controller ======================"
-		puts @funcionarios.map{|fun| [fun.nome , fun.id] }
 	end
 
 	def atualizar_chamado
 		if params[:status] == "true"
-			chamado = HistoricoChamado.create(:chamado_id => params[:chamado_id] , :funcionario_id => 1 , :historico => params[:historico])
-			chamado = HistoricoChamado.create(:chamado_id => params[:chamado_id] , :funcionario_id => 1 , :historico => "O chamado foi encerrado ")
-			chamado = Chamado.where("id = ?", params[:chamado_id])
+			chamado = HistoricoChamado.create(:chamado_id => params[:chamado_id] , :funcionario_id => @current_user.id , :historico => params[:historico])
+			chamado = HistoricoChamado.create(:chamado_id => params[:chamado_id] , :funcionario_id => @current_user , :historico => "O chamado foi encerrado ")
+			chamado = Chamado.where("id = ?", params[:chamado_id])[0]
 			chamado.update_attributes(:status => true)
-			flash[:notice] = "Chamado Encerrado com sucesso"
-			redirect_to(:action => :index)
 		else
-			#chamados = HistoricoChamado.create(:chamado_id => params[:chamado_id] , :funcionario_id => 1 , :historico => params[:historico_chamados][:historico])
-			#flash[:notice] = "Chamado Encerrado com sucesso"
-			#redirect_to(:action => :detalhes , :chamado_id => chamados.chamado_id)
-		puts "================== CHAMADO ======================"
-		puts params[:chamado_id]
-		puts params[:cliente_id]
-		puts params[:atribuido_para]
-		puts params[:status]
-		puts params[:historico]
-		puts "================================================="
-
-		redirect_to :back
+			chamados = HistoricoChamado.create(:chamado_id => params[:chamado_id] , :funcionario_id => @current_user.id , :historico => params[:historico_chamado][:historico])	
 		end
+		flash[:notice] = "Chamado Alterado com sucesso"
+		redirect_to(:action => "index")
 	end
 
-	private
-		def chamado_params
-			if params[:chamado][:agendamento] == false
-				params.require(:chamado).permit(:cliente_id , :servico_id , :atribuido_para , :descricao , :funcionario_id)
-			else  
-				params.require(:chamado).permit(:cliente_id , :servico_id , :atribuido_para , :descricao , :agendamento , :hora_saida , :funcionario_id)
-			end
-		end
 end

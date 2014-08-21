@@ -1,0 +1,43 @@
+<table class="table_chamado">
+	<tr>
+		<td> Cliente: </td>
+		<td> <%= select_tag :cliente_id , options_for_select(@cliente.map{|cl| [cl.nome , cl.id] }) %> </td>
+	</tr>
+	<tr>
+		<td> Serviço: </td>
+		<td> <%= select_tag :servico_id , options_for_select(@servico.map{|sr| [sr.nome , sr.id] }) %> </td>
+		<td> Situação: </td>
+		<td> <%= select_tag :status , options_for_select([["Aberto","false"],["Fechado","true"]]) %> </td>
+	</tr>
+	<tr colspan=4>
+		<td> Atribuido para: </td>
+		<td>
+			<%= select_tag :atribuido_para, options_for_select(@funcionarios.map{ |fun| [fun.nome , fun.id] } , :selected => @chamado.atribuido_para )  %>
+		</td>
+	</tr>
+	<tr>
+		<td> Descrição: </td>
+		<td colspan=4>
+			<div style="width: 550px; height: 40px; background-color: #EEE8AA;">
+				<%= @chamado.descricao %> 
+			</div>				
+		</td>
+	</tr>
+	<tr>
+		<td> Chegada: </td>
+		<td colspan=2> <%= datetime_select(:hora_chegada, order: [:day, :month, :year] )%> </td>
+	</tr>
+	<tr>
+		<td> Saída: </td>
+		<td colspan=2> <%= datetime_select(:hora_saida, order: [:day, :month, :year] )%> </td>
+	</tr>
+	<tr>
+		<td colspan=4> Historico: </td>
+	</tr>
+	<tr>
+		<td colspan=4> <%= f.text_area :historico, :size => "80x5" %> </td>
+	</tr>
+	<tr>
+		<td> <%= f.submit "Atualizar chamado" %> </td>
+	</tr>
+</table>

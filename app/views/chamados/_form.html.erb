@@ -5,7 +5,7 @@
 	</tr>
 	<tr>
 		<td> Tipos de chamado: </td>
-		<td> <%= f.select :servico_id , options_for_select(@servico.map { |ch| [ch.nome , ch.id]  }) %> </td>
+		<td> <%= f.select :servico_id , options_for_select(@servico.map { |ch| [ch.nome + " R$ " + ch.preco.to_s, ch.id]  }) %> </td>
 	</tr>
 	<tr>
 		<td> Atribuir para: </td>

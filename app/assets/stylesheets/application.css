@@ -40,6 +40,10 @@ th {
 	font-weight: bold;
 }
 
+.table_chamado {
+	border: 1px solid;
+}
+
 .border_radius_left {
 	border-top-left-radius: 20px;
 	border: 1px solid #000;

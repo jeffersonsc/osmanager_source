@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
   private
 
   def authorize
-    puts "================ authorize =================="
     puts @current_user
   	if session[:usuario_id].blank?
   		flash[:error] = "Voce não está logado"
@@ -18,9 +17,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    puts "=================================="
     @current_user ||= Funcionario.where("id = ?" , session[:usuario_id])[0] if session[:usuario_id]
-    puts "current user"
-    puts @current_user.nome
   end
 end

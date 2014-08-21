@@ -3,44 +3,14 @@
 
 <% if @chamado.status == false %>
 	<strong> Chamado criado por <%= funcionario(@chamado.funcionario_id) %> Ás <%= datetime(@chamado.created_at) %> </strong>
-	<table border=1>
-		<%= form_for(@historico, :url => {:controller => "chamados" , :action => "atualizar_chamado" , :chamado_id => @chamado.id }, :method => :post) do |f| %>
-			<tr>
-				<td> Cliente: </td>
-				<td> <%= select_tag :cliente_id , options_for_select(@cliente.map{|cl| [cl.nome , cl.id] }) %> </td>
-			</tr>
-			<tr>
-				<td> Serviço: </td>
-				<td> <%= select_tag :servico_id , options_for_select(@servico.map{|sr| [sr.nome , sr.id] }) %> </td>
-				<td> Situação: </td>
-				<td> <%= select_tag :status , options_for_select([["Aberto","false"],["Fechado","true"]]) %> </td>
-			</tr>
-			<tr colspan=4>
-				<td> Atribuido para: </td>
-				<td>
-					<select name="atribuido_para">
-						<%= options_for_select(@funcionarios.map { |fun| [fun.nome , fun.id] }) %>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td> Descrição: </td>
-				<td colspan=4>
-					<div style="width: 550px; height: 40px; background-color: #EEE8AA;">
-						<%= @chamado.descricao %> 
-					</div>				
-				</td>
-			</tr>
-			<tr>
-				<td colspan=4> Historico: </td>
-			</tr>
-			<tr>
-				<td colspan=4> <%= f.text_area :historico, :size => "80x5" %> </td>
-			</tr>
-			<tr>
-				<td> <%= f.submit "Atualizar chamado" %> </td>
-			</tr>
-		<% end %>
+	<table>
+		<tr>
+			<td>
+				<%= form_for(@historico, :url => {:controller => "chamados" , :action => "atualizar_chamado" , :chamado_id => @chamado.id }, :method => :post) do |f| %>
+					<%= render(:partial => "form_detail" , :locals => {:f => f}) %>
+				<% end %>
+			</td>
+		</tr>	
 	</table>
 	<table>
 		<% if @historico_chamados.size > 0 %>
@@ -57,7 +27,7 @@
 		<% end %>
 	</table>
 <% else %>
-	<table border=1>
+	<table>
 		<tr>
 			<td> Cliente: </td>
 			<td colspan=3> <%= @cliente[0].nome %> </td>
